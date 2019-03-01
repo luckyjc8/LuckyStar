@@ -29,6 +29,7 @@ namespace LuckyStar
                     paths[Int32.Parse(input[0])].AddLast(Int32.Parse(input[1]))
                 }
             }
+            return paths;
         }
     }
 }
