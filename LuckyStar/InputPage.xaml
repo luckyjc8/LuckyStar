@@ -9,6 +9,18 @@
       Title="InputPage">
 
     <Grid Background="BlanchedAlmond">
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource headerTextStyle}">Input Graf</Label>
+        <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource labelStyle}">Masukkan nama file eksternal</Label>
+        <TextBox Grid.Column="0" Grid.Row="2" Name="namaFile" Style="{StaticResource textBoxStyle}"/>
+        <Button Grid.Column="0" Grid.Row="3" Click="submitButton" Style="{StaticResource buttonStyle}">Submit</Button>
     </Grid>
 </Page>

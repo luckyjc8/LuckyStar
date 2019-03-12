@@ -24,5 +24,12 @@ namespace LuckyStar
         {
             InitializeComponent();
         }
+
+        private void submitButton(object sender, RoutedEventArgs e)
+        {
+            //InputPage inputPage = new InputPage();
+            //this.NavigationService.Navigate(inputPage);
+            // return namaFile.Text;
+        }
     }
 }
