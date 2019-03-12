@@ -16,13 +16,19 @@ using System.Windows.Shapes;
 namespace LuckyStar
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class Home : Page
     {
-        public MainWindow()
+        public Home()
         {
             InitializeComponent();
+        }
+
+        private void startButton(object sender, RoutedEventArgs e)
+        {
+            InputPage inputPage = new InputPage();
+            this.NavigationService.Navigate(inputPage);
         }
     }
 }
