@@ -27,9 +27,8 @@ namespace LuckyStar
 
         private void submitButton(object sender, RoutedEventArgs e)
         {
-            //InputPage inputPage = new InputPage();
-            //this.NavigationService.Navigate(inputPage);
-            // return namaFile.Text;
+            GraphPage graphPage = new GraphPage(namaFile.Text);
+            NavigationService.Navigate(graphPage);
         }
     }
 }

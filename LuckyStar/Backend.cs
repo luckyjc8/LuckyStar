@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace LuckyStar
 {
-    class Backend
+    public class Backend
     {
-        LinkedList<int>[] public readMap(string path)
+        /*LinkedList<int>[] public readMap(string path)
         {
             int houses;
             LinkedList<int>[] paths;
@@ -26,15 +26,10 @@ namespace LuckyStar
                 else
                 {
                     inputs = input.Split(" ");
-                    paths[Int32.Parse(input[0])].AddLast(Int32.Parse(input[1]))
+                    paths[Int32.Parse(input[0])].AddLast(Int32.Parse(input[1]));
                 }
             }
             return paths;
-        }
-
-        int public test()
-        {
-            return 237;
-        }
+        }*/
     }
 }
