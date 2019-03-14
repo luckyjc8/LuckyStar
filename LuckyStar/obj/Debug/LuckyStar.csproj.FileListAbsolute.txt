@@ -1,0 +1,15 @@
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar.csprojAssemblyReference.cache
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\MainWindow.g.cs
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\App.g.cs
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar_MarkupCompile.cache
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar_MarkupCompile.lref
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\bin\Debug\LuckyStar.exe.config
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\bin\Debug\LuckyStar.exe
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\bin\Debug\LuckyStar.pdb
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\MainWindow.baml
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar.g.resources
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar.Properties.Resources.resources
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar.csproj.GenerateResource.cache
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar.csproj.CoreCompileInputs.cache
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar.exe
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar.pdb

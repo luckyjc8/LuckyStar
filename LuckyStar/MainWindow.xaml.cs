@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace LuckyStar
 {
     /// <summary>
@@ -23,6 +24,9 @@ namespace LuckyStar
         public MainWindow()
         {
             InitializeComponent();
+            Console.WriteLine("Hello!!!!!!!!!!!!");
+            LinkedList<int>[] paths = Backend.readMap("C:/Users/LuckyChandra/source/repos/LuckyStar/LuckyStar/input_files/1.txt");
+            
         }
     }
 }
