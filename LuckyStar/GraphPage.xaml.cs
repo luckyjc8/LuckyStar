@@ -20,8 +20,10 @@ namespace LuckyStar
     /// <summary>
     /// Interaction logic for GraphPage.xaml
     /// </summary>
+    
     public partial class GraphPage : Page
     {
+        public double x1, y1, x2, y2, x, y; //global variabel buat garis
 
         public GraphPage(string fileName) : this()
         {
@@ -38,11 +40,18 @@ namespace LuckyStar
             int max = 2;
             
             MakeGrid(myGrid, r, max); //bikin column & row definition
-            DrawLine(100, 100, 400, 400, blankGrid);
-            this.Content = mainGrid;
+            MakeGraf(r); //bikin draw testing
+            this.Content = mainGrid; //nambahin ke konten
         }
 
-        private void DrawLine(double x1, double y1, double x2, double y2, Grid g)
+        public void MakeGraf(double r) //INI TESTING, Tapi fungsi ini nanti bakal dipake
+        {
+            DrawCircle(r, 1, 1, true, myGrid);
+            DrawCircle(r, 2, 2, false, myGrid);
+            DrawLine(blankGrid);
+        }
+
+        private void DrawLine(Grid g) //buat bikin garis
         {
             Line l1 = new Line();
             l1.X1 = x1;
@@ -57,19 +66,19 @@ namespace LuckyStar
             g.Children.Add(l1);
         }
 
-        public Grid MakeGrid(Grid g, double r, int max)
+        public Grid MakeGrid(Grid g, double r, int max) //ini buat bikin grid2nya (kotak buat taro circle)
         //g = gridnya, r = diameter circles, max = jml circles
         {
             g.ShowGridLines = false;
             g.MaxHeight = max * r;
             g.MaxWidth = max * r; 
 
-            for (int i = 0; i < max; i++)
+            for (int i = 0; i < max; i++) //bagi grid jadi column2
             {
                 ColumnDefinition x1 = new ColumnDefinition();
                 g.ColumnDefinitions.Add(x1);
             }
-            for (int i = 0; i < max; i++)
+            for (int i = 0; i < max; i++) //bagi grid jadi row2
             {
                 RowDefinition y1 = new RowDefinition();
                 g.RowDefinitions.Add(y1);
@@ -78,8 +87,9 @@ namespace LuckyStar
             return g;
         }
 
-        public void MakeCircles(Grid g, double r, int max, double x, double y)
-        //g = gridnya, r = diameter circles, max = jml circles, x = koordinat x, y = koordinat y
+        public void MakeCircles(Grid g, double r, int max)
+        //INI BUAT TESTING KALO MAU BIKIN BYK CIRCLE
+        //g = gridnya, r = diameter circles, max = jml circles
         {
             g.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             g.VerticalAlignment = VerticalAlignment.Top;
@@ -89,12 +99,14 @@ namespace LuckyStar
             {
                 int column = max/(i+1);
                 int row = i;
-                DrawCircle(r, column, row, x, y, g);
+                DrawCircle(r, column, row, true, g);
             }
         }
 
-        private void DrawCircle(double r, int column, int row, double x, double y, Grid s)
-        //s = gridnya, r = diameter circles, column = column di grid, row = row di grid, x = koordinat x, y = koordinat y
+        private void DrawCircle(double r, int column, int row, bool asal, Grid s)
+        //INI BUAT BIKIN 1 CIRCLE
+        //s = gridnya, r = diameter circles, column = column di grid, row = row di grid, 
+        //asal = if bapak then true else if anak then false
         {
             Ellipse circle = new Ellipse();
             SolidColorBrush b1 = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0,0,0,0));
@@ -107,8 +119,17 @@ namespace LuckyStar
 
             Grid.SetColumn(circle, column);
             Grid.SetRow(circle, row);
-            x = circle.Width * column - circle.Width/2;
-            y = circle.Height * row - circle.Height/2;
+
+            if (asal) //nentuin ini anak atau bapak, buat ganti x1 x2 dll
+            {
+                x1 = circle.Width * column - circle.Width / 2;
+                y1 = circle.Height * row - circle.Height / 2;
+            }
+            else
+            {
+                x2 = circle.Width * column - circle.Width / 2;
+                y2 = circle.Height * row - circle.Height / 2;
+            }
 
             s.Children.Add(circle);
         }
