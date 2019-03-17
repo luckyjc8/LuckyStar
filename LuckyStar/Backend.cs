@@ -5,8 +5,9 @@ using System.IO;
 
 namespace LuckyStar
 {
-    class Backend
+    public class Backend
     {
+
         public static LinkedList<int>[] ReadMap(string path)
         //Membaca berkas pemetaan dan menyimpan datanya dalam bentuk array of LinkedList<int>
         {
@@ -95,7 +96,11 @@ namespace LuckyStar
                 {
                     if ((a == 0 && p < b) || (a == 1 && p > b)) //validasi rute sesuai syarat mendekati/menjauhi istana
                     {
-                        ans = Solve(a, b, p, paths, temp);
+                        string[] ans_temp = Solve(a, b, p, paths, temp);
+                        for(int i = ans.Length; i<=ans_temp.Length;i++)
+                        {
+                            ans[i] = ans_temp[i]; //enumerasi path ditambah.
+                        }
                     }
                     if (ans[0] == "YA") // solusi ditemukan
                     {

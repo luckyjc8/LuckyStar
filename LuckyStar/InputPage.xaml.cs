@@ -13,20 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace LuckyStar
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for InputPage.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class InputPage : Page
     {
-        public MainWindow()
+        public InputPage()
         {
             InitializeComponent();
-            Console.WriteLine("Hello!!!!!!!!!!!!");
-            LinkedList<int>[] paths = Backend.ReadMap("C:/Users/LuckyChandra/source/repos/LuckyStar/LuckyStar/input_files/1.txt");
-            
+        }
+
+        private void submitButton(object sender, RoutedEventArgs e)
+        {
+            GraphPage graphPage = new GraphPage(namaFile.Text);
+            NavigationService.Navigate(graphPage);
         }
     }
 }

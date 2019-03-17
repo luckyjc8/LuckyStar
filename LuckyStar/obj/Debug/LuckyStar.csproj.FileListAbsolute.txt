@@ -13,3 +13,10 @@ C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar.cspro
 C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar.csproj.CoreCompileInputs.cache
 C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar.exe
 C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\LuckyStar.pdb
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\GraphPage.g.cs
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\Home.g.cs
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\InputPage.g.cs
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\App.baml
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\GraphPage.baml
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\Home.baml
+C:\Users\LuckyChandra\source\repos\LuckyStar\LuckyStar\obj\Debug\InputPage.baml

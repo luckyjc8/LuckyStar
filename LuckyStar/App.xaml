@@ -4,6 +4,51 @@
              xmlns:local="clr-namespace:LuckyStar"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="headerTextStyle">
+            <Setter Property="Label.VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Label.HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Label.FontFamily" Value="Consolas"></Setter>
+            <Setter Property="Label.FontWeight" Value="Bold"></Setter>
+            <Setter Property="Label.FontSize" Value="50"></Setter>
+            <Setter Property="Label.Foreground" Value="#423312"></Setter>
+        </Style>
+        <Style x:Key="labelStyle" TargetType="{x:Type Label}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Consolas"></Setter>
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="25"></Setter>
+            <Setter Property="Foreground" Value="#9b7f41"></Setter>
+        </Style>
+        <Style x:Key="normalStyle" TargetType="{x:Type Label}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Consolas"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+        </Style>
+        <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="125" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+        <Style x:Key="radioStyle" TargetType="{x:Type RadioButton}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Consolas"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+        </Style>
+        <Style x:Key="textBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Width" Value="300" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Consolas"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
     </Application.Resources>
 </Application>
