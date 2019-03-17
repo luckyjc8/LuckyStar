@@ -36,11 +36,11 @@ namespace LuckyStar
             return paths; //hasil akhir array of LinkedList<int>
         }
 
-        public static List<bool> SolveBulk(string path, LinkedList<int>[] paths)
+        public static List<string[]> SolveBulk(string path, LinkedList<int>[] paths)
         //menjawab pertanyaan beruntun Ferdiant dari membaca berkas eksternal
         {
             int instances = new int();
-            List<bool> answers = new List<bool>(); // penampung jawaban
+            List<string[]> answers = new List<string[]>(); // penampung jawaban
             string text = File.ReadAllText(@path, Encoding.UTF8);
             string[] txt = text.Split('\n');
             bool first = true;
@@ -61,40 +61,51 @@ namespace LuckyStar
                     else //kasus normal, pertanyaan dibaca dan diproses dengan fungsi Solve
                     {
                         string[] inputs = input.Split(' ');
-                        answers.Add(Solve(Int32.Parse(inputs[0]), Int32.Parse(inputs[1]), Int32.Parse(inputs[2]), paths));
+                        answers.Add(Solve(Int32.Parse(inputs[0]), Int32.Parse(inputs[1]), Int32.Parse(inputs[2]), paths, ""));
                     }
                 }
             }
             return answers; //List of jawaban dikembalikan
         }
 
-        public static bool Solve(int a,int b,int c, LinkedList<int>[] paths)
+        public static string[] Solve(int a,int b,int c, LinkedList<int>[] paths, string temp)
         //Menjawab pertanyaan dari Ferdiant
         {
+            string old_temp = temp; // variasi baru dari path
+            temp += c + "-";
+            string[] ans = new string[paths.Length];
             if (c == b) // rumah ditemukan
             {
-                return true;
+                ans[0] = "YA";
+                ans[ans.Length] = temp;
+                temp = ""; //temp direset
+                return ans;
             }
             else if (c == 1 || paths[c].Count == 0) //jalan buntu, rumah tidak ditemukan
             {
-                return false;
+                ans[0] = "TIDAK";
+                ans[ans.Length] = temp;
+                temp = ""; //temp direset
+                return ans;
             }
             else //masih bisa jalan ke rumah berikutnya
             {
-                bool found = false;
+
                 foreach (int p in paths[c]) //semua kemungkinan rumah yang bisa dicapai
                 {
                     if ((a == 0 && p < b) || (a == 1 && p > b)) //validasi rute sesuai syarat mendekati/menjauhi istana
                     {
-                        found = found && Solve(a, b, p, paths); //rekursi Solve dari rumah tujuan (DFS)
+                        ans = Solve(a, b, p, paths, temp);
                     }
-                    if (found) // solusi ditemukan
+                    if (ans[0] == "YA") // solusi ditemukan
                     {
                         break;
                     }
                 }
-                return found; //solusi dikembalikan
+                
             }
+            temp = old_temp; //variasi selesai
+            return ans; //solusi dikembalikan
         }
     }
 }
