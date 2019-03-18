@@ -35,18 +35,23 @@ namespace LuckyStar
         {
             InitializeComponent();
 
-            double r = 50;
+            double r = 100;
             int max = 2;
             
+            //INI TESTING
             MakeGrid(myGrid, r, max); //bikin column & row definition
-            MakeGraf(r); //bikin draw testing
+            DrawCircle(max, r, 0, 0, true, myGrid);
+            DrawCircle(max, r, 1, 1, false, myGrid);
+            DrawLine(blankGrid);
+            infoXY.Content = x1 + " " + y1 + " " + x2 + " " + y2;
             this.Content = mainGrid; //nambahin ke konten
+            //INI TESTING
         }
 
         public void MakeGraf(double r) //INI TESTING, Tapi fungsi ini nanti bakal dipake
         {
-            DrawCircle(r, 1, 1, true, myGrid);
-            DrawCircle(r, 2, 2, false, myGrid);
+            DrawCircle(2, r, 1, 1, true, myGrid);
+            DrawCircle(2, r, 2, 2, false, myGrid);
             DrawLine(blankGrid);
         }
 
@@ -68,9 +73,7 @@ namespace LuckyStar
         public Grid MakeGrid(Grid g, double r, int max) //ini buat bikin grid2nya (kotak buat taro circle)
         //g = gridnya, r = diameter circles, max = jml circles
         {
-            g.ShowGridLines = false;
-            g.MaxHeight = max * r;
-            g.MaxWidth = max * r; 
+            g.ShowGridLines = true;
 
             for (int i = 0; i < max; i++) //bagi grid jadi column2
             {
@@ -98,11 +101,11 @@ namespace LuckyStar
             {
                 int column = max/(i+1);
                 int row = i;
-                DrawCircle(r, column, row, true, g);
+                DrawCircle(max, r, column, row, true, g);
             }
         }
 
-        private void DrawCircle(double r, int column, int row, bool asal, Grid s)
+        private void DrawCircle(int max, double r, int column, int row, bool asal, Grid s)
         //INI BUAT BIKIN 1 CIRCLE
         //s = gridnya, r = diameter circles, column = column di grid, row = row di grid, 
         //asal = if bapak then true else if anak then false
@@ -114,32 +117,35 @@ namespace LuckyStar
             circle.Fill = b1;
 
             circle.Width = r;
-            circle.Height = r;
+            circle.Height = r;            
 
             Grid.SetColumn(circle, column);
             Grid.SetRow(circle, row);
-
+            
             if (asal) //nentuin ini anak atau bapak, buat ganti x1 x2 dll
             {
-                x1 = circle.Width * column - circle.Width / 2;
-                y1 = circle.Height * row - circle.Height / 2;
+
+                //x1 = (s.DesiredSize.Width / max) * (column + 1) - (s.DesiredSize.Width / max) / 2;
+                //y1 = (s.ActualHeight / max) * (row + 1) - (s.ActualHeight / max) / 2;
+                x1 = blankGrid.ActualHeight;                
+                y1 = blankGrid.ActualWidth;
             }
             else
             {
-                x2 = circle.Width * column - circle.Width / 2;
-                y2 = circle.Height * row - circle.Height / 2;
+                x2 = (s.ActualWidth / max) * (column + 1) - (s.ActualWidth / max) / 2;
+                y2 = (s.ActualHeight / max) * (row + 1) - (s.ActualHeight / max) / 2;
             }
 
             s.Children.Add(circle);
         }
 
-        private void handleCheck(object sender, RoutedEventArgs e)
+        private void HandleCheck(object sender, RoutedEventArgs e)
         {
             //RadioButton rb = sender as RadioButton;
             //return rb.Name;
         }
 
-        private void submitButton(object sender, RoutedEventArgs e)
+        private void SubmitButton(object sender, RoutedEventArgs e)
         {
             /*
             //GraphPage graphPage = new GraphPage(namaFile.Text);
@@ -156,11 +162,6 @@ namespace LuckyStar
                 Console.WriteLine(choice);
             }
             */
-        }
-
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
         }
     }
 }
