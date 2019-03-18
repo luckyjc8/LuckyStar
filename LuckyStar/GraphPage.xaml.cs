@@ -38,32 +38,31 @@ namespace LuckyStar
 
             y = 120;
             x = 20;
-            DrawGraph(1, paths, visited);
+            DrawGraph(1, paths, visited, false);
         }
 
-        void DrawGraph(int i,LinkedList<int>[] paths, bool[] visited)
+        void DrawGraph(int i,LinkedList<int>[] paths, bool[] visited, bool last)
         {
-            bool changed = false; ;
             foreach (int p in paths[i])
             {
                 if (!visited[p])
                 {
-                    changed = true;
                     DrawCircle(x, y, canvas1, p);
                     visited[p] = true;
                     x += 100;
-
-                    foreach(int child in paths[p])
+                    foreach (int child in paths[p])
                     {
-                        DrawGraph(child, paths, visited);
+                        if (0) { gnl(); } //condition new line nya blom tau
+                        DrawGraph(child, paths, visited, (p == paths[i].Last.Value));
                     }
+
                 }
             }
-            if (changed)
-            {
-                y += 100;
-                x = 20;
-            }
+        }
+
+        void gnl() //graph new line
+        {
+            y += 100; x = 20;
         }
 
         void drawingGrid_SizeChanged(object sender, SizeChangedEventArgs e)
