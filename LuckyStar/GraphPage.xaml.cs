@@ -121,19 +121,20 @@ namespace LuckyStar
 
             Grid.SetColumn(circle, column);
             Grid.SetRow(circle, row);
-            
+            circle.UpdateLayout();
+
             if (asal) //nentuin ini anak atau bapak, buat ganti x1 x2 dll
             {
 
-                //x1 = (s.DesiredSize.Width / max) * (column + 1) - (s.DesiredSize.Width / max) / 2;
-                //y1 = (s.ActualHeight / max) * (row + 1) - (s.ActualHeight / max) / 2;
-                x1 = blankGrid.ActualHeight;                
-                y1 = blankGrid.ActualWidth;
+                //x1 = (circle.Width / max) * (column + 1) - (circle.Width / max) / 2;
+                //y1 = (circle.Height / max) * (row + 1) - (circle.Height / max) / 2;
+                x1 = circle.Margin.Top;
+                y1 = circle.Margin.Left;
             }
             else
             {
-                x2 = (s.ActualWidth / max) * (column + 1) - (s.ActualWidth / max) / 2;
-                y2 = (s.ActualHeight / max) * (row + 1) - (s.ActualHeight / max) / 2;
+                x2 = (circle.Width / max) * (column + 1) - (circle.Width / max) / 2;
+                y2 = (circle.Height / max) * (row + 1) - (circle.Height / max) / 2;
             }
 
             s.Children.Add(circle);

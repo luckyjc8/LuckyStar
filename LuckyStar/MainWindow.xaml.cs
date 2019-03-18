@@ -25,8 +25,6 @@ namespace LuckyStar
         {
             InitializeComponent();
             Console.WriteLine("Hello!!!!!!!!!!!!");
-            LinkedList<int>[] paths = Backend.ReadMap("C:/Users/LuckyChandra/source/repos/LuckyStar/LuckyStar/input_files/1.txt");
-            
         }
     }
 }
