@@ -23,14 +23,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" Style="{StaticResource labelStyle}">Input Pertanyaan</Label>
-        <RadioButton x:Name="langsung" Grid.Column="1" Grid.Row="2" Style="{StaticResource radioStyle}" Checked="handleCheck">Masukkan pertanyaan</RadioButton>
+        <RadioButton x:Name="langsung" Grid.Column="1" Grid.Row="2" Style="{StaticResource radioStyle}" Checked="HandleCheck">Masukkan pertanyaan</RadioButton>
         <TextBox Grid.Column="1" Grid.Row="3" Name="pertanyaan" Style="{StaticResource textBoxStyle}"/>
-        <RadioButton x:Name="eksternal" Grid.Column="1" Grid.Row="4" Style="{StaticResource radioStyle}" Checked="handleCheck">Masukkan nama file eksternal</RadioButton>
+        <RadioButton x:Name="eksternal" Grid.Column="1" Grid.Row="4" Style="{StaticResource radioStyle}" Checked="HandleCheck">Masukkan nama file eksternal</RadioButton>
         <TextBox Grid.Column="1" Grid.Row="5" Name="namaFile" Style="{StaticResource textBoxStyle}"/>
-        <Button Grid.Column="1" Grid.Row="6" Click="submitButton" Style="{StaticResource buttonStyle}">Submit</Button>
-        <Grid HorizontalAlignment="Left" Height="450" Grid.RowSpan="7" VerticalAlignment="Top" Width="400">
-            <Grid x:Name="myGrid" Grid.Column="0" Grid.RowSpan="7"/>
-            <Grid x:Name="blankGrid" Grid.Column="0" Grid.RowSpan="7"/>            
-        </Grid>
+        <Button Grid.Column="1" Grid.Row="6" Click="SubmitButton" Style="{StaticResource buttonStyle}">Submit</Button>
+        <Grid x:Name="blankGrid" Grid.Column="0" Grid.RowSpan="7"/>
+        <Grid x:Name="myGrid" Grid.Column="0" Grid.RowSpan="7"/>
+        <Label x:Name="infoXY" Grid.Column="0" Grid.Row="0"/>
     </Grid>
 </Page>
