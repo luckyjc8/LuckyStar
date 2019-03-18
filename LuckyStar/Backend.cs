@@ -9,7 +9,7 @@ namespace LuckyStar
     {
 
         public static LinkedList<int>[] ReadMap(string path)
-        //Membaca berkas pemetaan dan menyimpan datanya dalam bentuk array of LinkedList<int>
+
         {
             path += ".txt";
            
@@ -18,23 +18,18 @@ namespace LuckyStar
             int houses = Int32.Parse(txt[0]); //membaca jumlah rumah
             
             LinkedList<int>[] paths = new LinkedList<int>[houses+1]; //alokasi data sesuai jumlah rumah
-            Console.WriteLine("rumah : " + houses);
             for (int i = 0; i <= houses; i++) //untuk sebanyak (jumlah rumah-1), lakukan :
             {
                 paths[i] = new LinkedList<int>(); //alokasi data LinkedList<int>
             }
 
+            paths[0].AddLast(houses);
             for (int i = 1; i <= houses-1; i++)
             {
                 string[] inputs = txt[i].Split(' ');
                 paths[Int32.Parse(inputs[0])].AddLast(Int32.Parse(inputs[1]));
+                paths[Int32.Parse(inputs[1])].AddLast(Int32.Parse(inputs[0]));
             }
-
-            /*For testing
-            foreach(LinkedList<int> path2 in paths)
-            {
-                Console.WriteLine(String.Join(" ",path2));
-            }*/
             
             return paths; //hasil akhir array of LinkedList<int>
         }
@@ -64,14 +59,19 @@ namespace LuckyStar
                     else //kasus normal, pertanyaan dibaca dan diproses dengan fungsi Solve
                     {
                         string[] inputs = input.Split(' ');
-                        answers.Add(Solve(Int32.Parse(inputs[0]), Int32.Parse(inputs[1]), Int32.Parse(inputs[2]), paths, ""));
+                        bool[] visited = new bool[paths.Length];
+                        for(int i = 0; i < paths.Length; i++)
+                        {
+                            visited[i] = false;
+                        }
+                        answers.Add(Solve(Int32.Parse(inputs[0]), Int32.Parse(inputs[1]), Int32.Parse(inputs[2]), paths, "", visited));
                     }
                 }
             }
             return answers; //List of jawaban dikembalikan
         }
 
-        public static string[] Solve(int a,int b,int c, LinkedList<int>[] paths, string temp)
+        public static string[] Solve(int a,int b,int c, LinkedList<int>[] paths, string temp, bool[] visited)
         //Menjawab pertanyaan dari Ferdiant
         {
             string old_temp = temp; // variasi baru dari path
@@ -96,17 +96,21 @@ namespace LuckyStar
 
                 foreach (int p in paths[c]) //semua kemungkinan rumah yang bisa dicapai
                 {
-                    if ((a == 0 && p < b) || (a == 1 && p > b)) //validasi rute sesuai syarat mendekati/menjauhi istana
+                    if (!visited[p])
                     {
-                        string[] ans_temp = Solve(a, b, p, paths, temp);
-                        for(int i = ans.Length; i<=ans_temp.Length;i++)
+                        visited[p] = true;
+                        if ((a == 0 && p < b) || (a == 1 && p > b)) //validasi rute sesuai syarat mendekati/menjauhi istana
                         {
-                            ans[i] = ans_temp[i]; //enumerasi path ditambah.
+                            string[] ans_temp = Solve(a, b, p, paths, temp, visited);
+                            for (int i = ans.Length; i <= ans_temp.Length; i++)
+                            {
+                                ans[i] = ans_temp[i]; //enumerasi path ditambah.
+                            }
                         }
-                    }
-                    if (ans[0] == "YA") // solusi ditemukan
-                    {
-                        break;
+                        if (ans[0] == "YA") // solusi ditemukan
+                        {
+                            break;
+                        }
                     }
                 }
                 
