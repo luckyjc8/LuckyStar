@@ -24,14 +24,13 @@ namespace LuckyStar
     {
         public double x1, y1, x2, y2, x, y; //global variabel buat garis
 
-        public GraphPage(string fileName) : this()
+        public GraphPage(string fileName)
         {
-            //Backend backend;
             InitializeComponent();
-            //LinkedList<int> paths = backend.readMap(fileName);
+            LinkedList<int>[] paths = Backend.ReadMap(fileName);
         }
 
-        public GraphPage()
+        /*public GraphPage()
         {
             InitializeComponent();
 
@@ -45,7 +44,7 @@ namespace LuckyStar
             //infoXY.Content = x1 + " " + y1 + " " + x2 + " " + y2;
             this.Content = mainGrid; //nambahin ke konten
             //INI TESTING
-        }
+        }*/
 
         public void MakeGraf(double r) //INI TESTING, Tapi fungsi ini nanti bakal dipake
         {

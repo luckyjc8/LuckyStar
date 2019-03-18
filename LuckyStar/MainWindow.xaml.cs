@@ -24,7 +24,6 @@ namespace LuckyStar
         public MainWindow()
         {
             InitializeComponent();
-            Console.WriteLine("Hello!!!!!!!!!!!!");
         }
     }
 }

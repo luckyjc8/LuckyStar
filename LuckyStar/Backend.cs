@@ -11,29 +11,31 @@ namespace LuckyStar
         public static LinkedList<int>[] ReadMap(string path)
         //Membaca berkas pemetaan dan menyimpan datanya dalam bentuk array of LinkedList<int>
         {
-            int houses;
-            LinkedList<int>[] paths = new LinkedList<int>[100000];
-
-            string text = File.ReadAllText(@path, Encoding.UTF8);
-            string[] txt = text.Split('\n');
-            bool first = true;
-            foreach (string input in txt) //pembacaan tiap baris
+            path += ".txt";
+           
+            string text = File.ReadAllText(@path, Encoding.UTF8); //membaca semua lines
+            string[] txt = text.Split('\n'); //memecah pembacaan menjadi per baris
+            int houses = Int32.Parse(txt[0]); //membaca jumlah rumah
+            
+            LinkedList<int>[] paths = new LinkedList<int>[houses+1]; //alokasi data sesuai jumlah rumah
+            Console.WriteLine("rumah : " + houses);
+            for (int i = 0; i <= houses; i++) //untuk sebanyak (jumlah rumah-1), lakukan :
             {
-                if (first) //assignment khusus untuk baris pertama
-                {
-                    houses = Int32.Parse(input);
-                    first = false;
-                    for(int i = 0; i < houses-1; i++) //untuk sebanyak (jumlah rumah-1), lakukan :
-                    {
-                        paths[i] = new LinkedList<int>(); //alokasi data LinkedList<int>
-                    }
-                }
-                else //menyalin rute antar rumah sebagai elemen LinkedList<int>
-                {
-                    string[] inputs = input.Split(' ');
-                    paths[Int32.Parse(inputs[0])].AddLast(Int32.Parse(inputs[1]));
-                }
+                paths[i] = new LinkedList<int>(); //alokasi data LinkedList<int>
             }
+
+            for (int i = 1; i <= houses-1; i++)
+            {
+                string[] inputs = txt[i].Split(' ');
+                paths[Int32.Parse(inputs[0])].AddLast(Int32.Parse(inputs[1]));
+            }
+
+            /*For testing
+            foreach(LinkedList<int> path2 in paths)
+            {
+                Console.WriteLine(String.Join(" ",path2));
+            }*/
+            
             return paths; //hasil akhir array of LinkedList<int>
         }
 
