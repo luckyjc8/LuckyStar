@@ -20,7 +20,8 @@
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource headerTextStyle}">Input Graf</Label>
         <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource labelStyle}">Masukkan nama file eksternal</Label>
-        <TextBox Grid.Column="0" Grid.Row="2" Name="namaFile" Style="{StaticResource textBoxStyle}"/>
+        <TextBox Grid.Column="0" Grid.Row="2" Name="namaFile" Style="{StaticResource textBoxStyle}" Margin="242,33,258,0"/>
         <Button Grid.Column="0" Grid.Row="3" Click="submitButton" Style="{StaticResource buttonStyle}">Submit</Button>
+        <Label Content="(tanpa extension .txt, path di &quot;LuckyStar/LuckyStar/bin/Debug/input&quot;)" HorizontalAlignment="Left" Margin="214,5,0,0" Grid.Row="2" VerticalAlignment="Top"/>
     </Grid>
 </Page>

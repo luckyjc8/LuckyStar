@@ -11,7 +11,7 @@ namespace LuckyStar
         public static LinkedList<int>[] ReadMap(string path)
 
         {
-            path += ".txt";
+            path = "input/"+path+".txt";
            
             string text = File.ReadAllText(@path, Encoding.UTF8); //membaca semua lines
             string[] txt = text.Split('\n'); //memecah pembacaan menjadi per baris
@@ -43,6 +43,7 @@ namespace LuckyStar
         public static List<List<string>> SolveBulk(string path, LinkedList<int>[] paths)
         //menjawab pertanyaan beruntun Ferdiant dari membaca berkas eksternal
         {
+            path = "input/" + path + ".txt";
             int instances = new int();
             List<List<string>> answers = new List<List<string>>(); // penampung jawaban
             string text = File.ReadAllText(@path, Encoding.UTF8);
