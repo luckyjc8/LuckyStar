@@ -24,7 +24,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" Style="{StaticResource labelStyle}">Input Pertanyaan</Label>
-        <RadioButton x:Name="langsung" Grid.Column="1" Grid.Row="2" Style="{StaticResource radioStyle}" Checked="HandleCheck">Masukkan pertanyaan</RadioButton>
+        <RadioButton x:Name="langsung" IsChecked="True"  Grid.Column="1" Grid.Row="2" Style="{StaticResource radioStyle}" Checked="HandleCheck">Masukkan pertanyaan</RadioButton>
         <TextBox Grid.Column="1" Grid.Row="3" Name="pertanyaan" Style="{StaticResource textBoxStyle}"/>
         <RadioButton x:Name="eksternal" Grid.Column="1" Grid.Row="4" Style="{StaticResource radioStyle}" Checked="HandleCheck">Masukkan nama file eksternal</RadioButton>
         <TextBox Grid.Column="1" Grid.Row="5" Name="namaFile" Style="{StaticResource textBoxStyle}" Margin="52,32,48,0"/>
