@@ -103,13 +103,13 @@ namespace LuckyStar
             temp += c + "-";
             if (c == b) // rumah ditemukan
             {
-                enumerations.Add(temp);
+                enumerations.Add(temp.Substring(0,temp.Length - 1));
                 temp = ""; //temp direset
                 return true;
             }
             else if (c == 1 && a == 0) //jalan sampai istana, rumah tidak ditemukan
             {
-                enumerations.Add(temp);
+                enumerations.Add(temp.Substring(0,temp.Length - 1));
                 temp = ""; //temp direset
                 return false;
             }
@@ -132,7 +132,7 @@ namespace LuckyStar
                 }
                 if (count == 0) //jika jalan buntu, rumah tidak ditemukan
                 {
-                    enumerations.Add(temp);
+                    enumerations.Add(temp.Substring(0, temp.Length - 1));
                     temp = ""; //temp direset
                     return false;
                 }

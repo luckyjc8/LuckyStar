@@ -39,27 +39,22 @@ namespace LuckyStar
                 visited[i] = false;
             }
 
-            string asdf = "5-2-3-4"; //INI BUAT INPUTNYA
-            string[] color = ColorGraf(asdf);
+            string[] color = new string[houses + 1];
             MakeGraf(visited, color);
 
-            //TESTING
             List<string> items = new List<string> { };
             items.Add("PERTANYAAN :");
-            items.Add("qwer");
             items.Add("  ");
             items.Add("JAWABAN :");
-            items.Add("asdf");
             items.Add("   ");
             items.Add("ENUMERASI LANGKAH :");
-            items.Add("zxcv");
             list1.ItemsSource = items;
         }
 
         void MakeGraf(bool[] visited, string[] color)
         {
             int level = 0;
-            arr = new double[1000001];
+            arr = new double[houses + 1];
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = 20;
@@ -193,17 +188,32 @@ namespace LuckyStar
                 int b = Int32.Parse(exploded[1]);
                 int c = Int32.Parse(exploded[2]);
                 List<string> enumeration = new List<string>();
-                bool answers = Backend.Solve(a, b, c, paths, "", enumeration);
-                Console.WriteLine(answers); //ini answer bools nya
-                foreach(string ans in enumeration)
+                bool answer = Backend.Solve(a, b, c, paths, "", enumeration);
+                
+                //Tulis jawaban
+                List<string> items = new List<string> { };
+                items.Add("PERTANYAAN :");
+                items.Add(pertanyaan.Text);
+                items.Add("  ");
+                items.Add("JAWABAN :");
+                items.Add(answer.ToString());
+                items.Add("   ");
+                items.Add("ENUMERASI LANGKAH :");
+                foreach (string ans in enumeration)
                 {
-                    Console.WriteLine("path : "+ans+", split : ");
-                    foreach(string node in ans.Split('-'))
-                    {
-                        Console.WriteLine(node);
-                    }
-
+                    items.Add(ans);
                 }
+                list1.ItemsSource = items;
+
+                //Mewarnai jalur jika ditemukan
+                string[] color = new string[houses + 1];
+                if (answer)
+                {
+                    color = ColorGraf(enumeration.Last());
+                }
+                bool[] visited = new bool[houses + 1];
+                for (int i = 0; i < houses; i++) { visited[i] = false; }
+                this.MakeGraf(visited, color);
             }
         }
     }
