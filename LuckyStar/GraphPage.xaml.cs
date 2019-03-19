@@ -28,8 +28,9 @@ namespace LuckyStar
         {
             InitializeComponent();
             LinkedList<int>[] paths = Backend.ReadMap(fileName);
-            bool[] visited = new bool[paths[0].First.Value+1];
-            for(int i=0;i< paths[0].First.Value + 1; i++)
+            int houses = paths[0].First.Value;
+            bool[] visited = new bool[houses+1];
+            for(int i=0;i< houses + 1; i++)
             {
                 visited[i] = false;
             }
@@ -42,19 +43,26 @@ namespace LuckyStar
             }
             y = 20;
             DrawGraph(1, paths, visited, level);
+            canvas1.Width = (houses+1) * 100;
+            canvas1.Height = (houses+1) * 100;
+
+            this.Content = mainGrid;
         }
 
         void DrawGraph(int i, LinkedList<int>[] paths, bool[] visited, int level)
         {
             visited[i] = true;
             DrawCircle(arr[level], y, canvas1, i);
+            x2 = arr[level] + 25;
+            DrawLine(canvas1);
             arr[level] += 100;
             y += 100;
             level++;
-            foreach(int p in paths[i])
+            foreach (int p in paths[i])
             {
                 if (!visited[p])
                 {
+                    x1 = arr[level] + 25;
                     DrawGraph(p, paths, visited, level);
                 }
             }
@@ -62,10 +70,11 @@ namespace LuckyStar
             level--;
         }
 
-        void drawingGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void drawingGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            try { canvas1.Height = y; } catch { }
-            try { canvas1.Width = x; } catch { }
+            try { canvas1.Height = y + 100; } catch { }
+            try { canvas1.Width = x + 100; } catch { }
+            infoXY.Content = "lalalala";
         }
 
 

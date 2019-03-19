@@ -8,32 +8,32 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GraphPage">
 
-    
-        <Grid x:Name="mainGrid" Background="BlanchedAlmond">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" Style="{StaticResource labelStyle}">Input Pertanyaan</Label>
-            <RadioButton x:Name="langsung" Grid.Column="1" Grid.Row="2" Style="{StaticResource radioStyle}" Checked="HandleCheck">Masukkan pertanyaan</RadioButton>
-            <TextBox Grid.Column="1" Grid.Row="3" Name="pertanyaan" Style="{StaticResource textBoxStyle}"/>
-            <RadioButton x:Name="eksternal" Grid.Column="1" Grid.Row="4" Style="{StaticResource radioStyle}" Checked="HandleCheck">Masukkan nama file eksternal</RadioButton>
-            <TextBox Grid.Column="1" Grid.Row="5" Name="namaFile" Style="{StaticResource textBoxStyle}"/>
-            <Button Grid.Column="1" Grid.Row="6" Click="SubmitButton" Style="{StaticResource buttonStyle}">Submit</Button>
-            <ScrollViewer>
-                <Canvas x:Name="canvas1" HorizontalAlignment="Left" Grid.RowSpan="7" VerticalAlignment="Top" SizeChanged="drawingGrid_SizeChanged"/>
-            </ScrollViewer>
-            <Label x:Name="infoXY" Grid.Column="0" Grid.Row="0"/>
-        </Grid>
-    
+
+    <Grid x:Name="mainGrid" Background="BlanchedAlmond">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" Style="{StaticResource labelStyle}">Input Pertanyaan</Label>
+        <RadioButton x:Name="langsung" Grid.Column="1" Grid.Row="2" Style="{StaticResource radioStyle}" Checked="HandleCheck">Masukkan pertanyaan</RadioButton>
+        <TextBox Grid.Column="1" Grid.Row="3" Name="pertanyaan" Style="{StaticResource textBoxStyle}"/>
+        <RadioButton x:Name="eksternal" Grid.Column="1" Grid.Row="4" Style="{StaticResource radioStyle}" Checked="HandleCheck">Masukkan nama file eksternal</RadioButton>
+        <TextBox Grid.Column="1" Grid.Row="5" Name="namaFile" Style="{StaticResource textBoxStyle}"/>
+        <Button Grid.Column="1" Grid.Row="6" Click="SubmitButton" Style="{StaticResource buttonStyle}">Submit</Button>
+        <ScrollViewer x:Name="scroll1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Grid.RowSpan="7">
+            <Canvas x:Name="canvas1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.RowSpan="7"/>
+        </ScrollViewer>
+        <Label x:Name="infoXY" Grid.Column="0" Grid.Row="0"/>
+    </Grid>
+
 </Page>
 
