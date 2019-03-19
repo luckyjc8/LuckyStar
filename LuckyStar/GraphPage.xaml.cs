@@ -97,6 +97,14 @@ namespace LuckyStar
             level--;
         }
 
+        private void List1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //INI BUAT NAMPILIN JALUS 
+            //1-2-3-4 
+            //5-6-7-8
+            //DLL
+        }
+
         private void DrawLine(Canvas g) //buat bikin garis
         {
             Line l1 = new Line();
