@@ -40,14 +40,12 @@ namespace LuckyStar
             }
 
             string asdf = "1-2-3-4"; //INI BUAT INPUTNYA
-            string[] color = ColorGraf(asdf);
 
-            MakeGraf(visited, color);
-
-            infoXY.Content = color[0];
+            MakeGraf(visited);
+            ColorGraf(asdf);
         }
 
-        void MakeGraf(bool[] visited, string[] color)
+        void MakeGraf(bool[] visited)
         {
             int level = 0;
             arr = new double[1000001];
@@ -56,26 +54,29 @@ namespace LuckyStar
                 arr[i] = 20;
             }
             y = 20;
-            DrawGraph(1, paths, visited, level, 20, 20, color);
+            DrawGraph(1, paths, visited, level, 20, 20);
             canvas1.Width = (houses + 1) * 100;
             canvas1.Height = (houses + 1) * 100;
             this.Content = mainGrid;
         }
 
-        string[] ColorGraf(string path)
+        void ColorGraf(string path)
         {
             string[] jalur = path.Split('-');
             for (int i = 0; i < jalur.Length; i++)
             {
                 jalur[i] = "c" + jalur[i];
             }
-            return jalur;
+            foreach (string node in jalur)
+            {
+                node.Fill = System.Windows.Media.Brushes.Red;
+            }
         }
 
-        void DrawGraph(int i, LinkedList<int>[] paths, bool[] visited, int level,double curr_x,double curr_y,string[] color)
+        void DrawGraph(int i, LinkedList<int>[] paths, bool[] visited, int level,double curr_x,double curr_y)
         {
             visited[i] = true;
-            DrawCircle(arr[level], y, canvas1, i, color);
+            DrawCircle(arr[level], y, canvas1, i);
             arr[level] += 100;
             y += 100;
             level++;
@@ -90,11 +91,16 @@ namespace LuckyStar
                     x2 = arr[level] + 25;
                     y2 = y + 25;
                     DrawLine(canvas1);
-                    DrawGraph(new_p, paths, visited, level,arr[level],y,color);
+                    DrawGraph(new_p, paths, visited, level,arr[level],y);
                 }
             }
             y -= 100;
             level--;
+        }
+
+        private void List1_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
         private void List1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -116,41 +122,16 @@ namespace LuckyStar
             g.Children.Add(l1);
         }
 
-        bool IsElemen(string[] arr, string a)
-        {
-            bool found = false;
-            int i = 0;
-            while ((i < arr.Length) && (!found))
-            {
-                if (arr[i] == a)
-                {
-                    found = true;
-                }
-                else
-                {
-                    i++;
-                }
-            }
-            return found;
-        }
-
-        private void DrawCircle(double x, double y,Canvas c,int no, string[] color)
+        private void DrawCircle(double x, double y,Canvas c,int no)
         {
             Ellipse circle = new Ellipse();
             circle.StrokeThickness = 3;
             circle.Stroke = System.Windows.Media.Brushes.Black;
+            circle.Fill = System.Windows.Media.Brushes.Black;
             circle.Width = 50;
             circle.Height = 50;
             string name = "c" + no.ToString();
             circle.Name = name;
-            if (IsElemen(color, name))
-            {
-                circle.Fill = System.Windows.Media.Brushes.Red;
-            }
-            else
-            {
-                circle.Fill = System.Windows.Media.Brushes.Black;
-            }
 
             TextBlock txt = new TextBlock();
             txt.Text = no.ToString();
