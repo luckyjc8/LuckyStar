@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
+using System.IO;
 
 namespace LuckyStar
 {
@@ -173,12 +174,45 @@ namespace LuckyStar
 
         private void SubmitButton(object sender, RoutedEventArgs e)
         {
-            //GraphPage graphPage = new GraphPage(namaFile.Text);
-            //NavigationService.Navigate(graphPage);
+            string[] color = new string[houses + 1];// var penampung array pewarnaan node
             if (radio == "eksternal")
             {
                 //proses file eksternal
-                Console.WriteLine(namaFile);
+                List<List<string>> enumeration = Backend.SolveBulk(namaFile.Text, paths);
+
+                //Tulis jawaban
+                List<string> items = new List<string> { };
+                items.Add("PERTANYAAN :");
+                string text = File.ReadAllText(@namaFile.Text, Encoding.UTF8);
+                string[] txt = text.Split('\n');
+                for(int j =1; j < txt.Length; j++)
+                {
+                    items.Add(j + ". " + txt[j]);
+                }
+                items.Add("  ");
+                items.Add("JAWABAN :");
+                int i = 1;
+                foreach(List<string> answer in enumeration)
+                {
+                    items.Add(i + ". " + answer.Last());
+                    i++;
+                }
+                items.Add("   ");
+                items.Add("ENUMERASI LANGKAH :");
+                i = 1;
+                foreach (List<string> answer in enumeration)
+                {
+                    items.Add(i + " :");
+                    foreach(string en in answer)
+                    {
+                        if(en != answer.Last())
+                        {
+                            items.Add(en);
+                        }
+                    }
+                    items.Add(" ");
+                }
+                list1.ItemsSource = items;
             }
             else // radio == "langsung"
             {
@@ -206,15 +240,16 @@ namespace LuckyStar
                 list1.ItemsSource = items;
 
                 //Mewarnai jalur jika ditemukan
-                string[] color = new string[houses + 1];
+                
                 if (answer)
                 {
                     color = ColorGraf(enumeration.Last());
                 }
-                bool[] visited = new bool[houses + 1];
-                for (int i = 0; i < houses; i++) { visited[i] = false; }
-                this.MakeGraf(visited, color);
+                
             }
+            bool[] visited = new bool[houses + 1];
+            for (int i = 0; i < houses; i++) { visited[i] = false; }
+            this.MakeGraf(visited, color);
         }
     }
 }
