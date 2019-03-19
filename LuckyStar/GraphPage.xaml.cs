@@ -23,12 +23,16 @@ namespace LuckyStar
     public partial class GraphPage : Page
     {
         public double x1, y1, x2, y2, x, y; //global variabel buat garis
+        public string radio;
         public double[] arr;
+        public LinkedList<int>[] paths;
+        public int houses;
+
         public GraphPage(string fileName)
         {
             InitializeComponent();
-            LinkedList<int>[] paths = Backend.ReadMap(fileName);
-            int houses = paths[0].First.Value;
+            paths = Backend.ReadMap(fileName);
+            houses = paths[0].First.Value;
             bool[] visited = new bool[houses+1];
             for(int i=0;i< houses + 1; i++)
             {
@@ -42,28 +46,30 @@ namespace LuckyStar
                 arr[i] = 20;
             }
             y = 20;
-            DrawGraph(1, paths, visited, level);
+            DrawGraph(1, paths, visited, level,20,20);
             canvas1.Width = (houses+1) * 100;
             canvas1.Height = (houses+1) * 100;
-
             this.Content = mainGrid;
         }
 
-        void DrawGraph(int i, LinkedList<int>[] paths, bool[] visited, int level)
+        void DrawGraph(int i, LinkedList<int>[] paths, bool[] visited, int level,double curr_x,double curr_y)
         {
             visited[i] = true;
             DrawCircle(arr[level], y, canvas1, i);
-            x2 = arr[level] + 25;
-            DrawLine(canvas1);
             arr[level] += 100;
             y += 100;
             level++;
+           
+            
             foreach (int p in paths[i])
             {
                 if (!visited[p])
                 {
-                    x1 = arr[level] + 25;
-                    DrawGraph(p, paths, visited, level);
+                    x1 = curr_x + 25; y1 = curr_y + 25;
+                    x2 = arr[level] + 25;
+                    y2 = y + 25;
+                    DrawLine(canvas1);
+                    DrawGraph(p, paths, visited, level,arr[level],y);
                 }
             }
             y -= 100;
@@ -98,6 +104,7 @@ namespace LuckyStar
             circle.Fill = System.Windows.Media.Brushes.Black;
             circle.Width = 50;
             circle.Height = 50;
+            circle.Name = "c" + no.ToString();
 
             TextBlock txt = new TextBlock();
             txt.Text = no.ToString();
@@ -116,27 +123,36 @@ namespace LuckyStar
 
         private void HandleCheck(object sender, RoutedEventArgs e)
         {
-            //RadioButton rb = sender as RadioButton;
-            //return rb.Name;
+            RadioButton rb = sender as RadioButton;
+            radio = rb.Name;
         }
 
         private void SubmitButton(object sender, RoutedEventArgs e)
         {
-            /*
             //GraphPage graphPage = new GraphPage(namaFile.Text);
             //NavigationService.Navigate(graphPage);
-            string choice = HandleCheck(sender, e);
-            if (choice == "eksternal")
+            if (radio == "eksternal")
             {
                 //proses file eksternal
-                Console.WriteLine(choice);
+                Console.WriteLine(namaFile);
             }
-            else
+            else // radio == "langsung"
             {
                 //proses input biasa
-                Console.WriteLine(choice);
+                string[] exploded = pertanyaan.Text.Split(' ');
+                int a = Int32.Parse(exploded[0]);
+                int b = Int32.Parse(exploded[1]);
+                int c = Int32.Parse(exploded[2]);
+                bool[] visited = new bool[houses];
+                for(int i = 0; i < houses; i++) { visited[i] = false; }
+                string[] answers = Backend.Solve(a, b, c, paths, "", visited);
+                Console.WriteLine("Balance in all things - IMBA Spirit");
+                foreach(string ans in answers)
+                {
+                    Console.WriteLine(ans);
+                }
+
             }
-            */
         }
     }
 }

@@ -30,11 +30,6 @@ namespace LuckyStar
                 paths[Int32.Parse(inputs[0])].AddLast(Int32.Parse(inputs[1]));
                 paths[Int32.Parse(inputs[1])].AddLast(Int32.Parse(inputs[0]));
             }
-
-            foreach(LinkedList<int> p2 in paths)
-            {
-                Console.WriteLine(String.Join(" ",p2));
-            }
             
             return paths; //hasil akhir array of LinkedList<int>
         }
