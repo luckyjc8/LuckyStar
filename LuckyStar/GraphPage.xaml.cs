@@ -183,7 +183,7 @@ namespace LuckyStar
                 //Tulis jawaban
                 List<string> items = new List<string> { };
                 items.Add("PERTANYAAN :");
-                string text = File.ReadAllText(@namaFile.Text, Encoding.UTF8);
+                string text = File.ReadAllText(@"input/"+namaFile.Text+".txt", Encoding.UTF8);
                 string[] txt = text.Split('\n');
                 for(int j =1; j < txt.Length; j++)
                 {
