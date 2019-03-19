@@ -23,7 +23,7 @@ namespace LuckyStar
     public partial class GraphPage : Page
     {
         public double x1, y1, x2, y2, x, y; //global variabel buat garis
-
+        public double[] arr;
         public GraphPage(string fileName)
         {
             InitializeComponent();
@@ -34,16 +34,32 @@ namespace LuckyStar
                 visited[i] = false;
             }
 
-            DrawCircle(20, 20, canvas1, 1);
-
-            y = 120;
-            x = 20;
-            DrawGraph(1, paths, visited, true);
+            int level = 0;
+            arr = new double[1000001];
+            for (int i = 0; i<arr.Length; i++)
+            {
+                arr[i] = 20;
+            }
+            y = 20;
+            DrawGraph(1, paths, visited, level);
         }
 
-        void DrawGraph(int i, LinkedList<int>[] paths, bool[] visited, bool last)
+        void DrawGraph(int i, LinkedList<int>[] paths, bool[] visited, int level)
         {
-           
+            visited[i] = true;
+            DrawCircle(arr[level], y, canvas1, i);
+            arr[level] += 100;
+            y += 100;
+            level++;
+            foreach(int p in paths[i])
+            {
+                if (!visited[p])
+                {
+                    DrawGraph(p, paths, visited, level);
+                }
+            }
+            y -= 100;
+            level--;
         }
 
         void drawingGrid_SizeChanged(object sender, SizeChangedEventArgs e)
