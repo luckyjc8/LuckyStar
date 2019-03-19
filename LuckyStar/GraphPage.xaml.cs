@@ -41,7 +41,7 @@ namespace LuckyStar
             DrawGraph(1, paths, visited, true);
         }
 
-        void DrawGraph(int i,LinkedList<int>[] paths, bool[] visited, bool last)
+        void DrawGraph(int i, LinkedList<int>[] paths, bool[] visited, bool last)
         {
             foreach (int p in paths[i])
             {
@@ -50,14 +50,14 @@ namespace LuckyStar
                     DrawCircle(x, y, canvas1, p);
                     visited[p] = true;
                     Console.WriteLine("el : " + p + " | " + paths[i].Last.Value);
-                    if (p == paths[i].Last.Value && last) { y += 100; x = 20; } //kondisi new line nya masih salah jg
-                    else { x += 100; } //cuman geser ke samping, gak new line
+                    last = (paths[i].Last.Value == p);
+                    if (last) { y += 100; x = 20; } //kondisi new line nya masih salah jg
+                    else { x += 100; } //cuman geser ke samping, gak new line  
                     foreach (int child in paths[p])
                     {
                         DrawGraph(child, paths, visited, (child == paths[p].Last.Value));
                     }
-
-                }
+                }                
             }
         }
 
