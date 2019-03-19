@@ -211,6 +211,7 @@ namespace LuckyStar
                         }
                     }
                     items.Add(" ");
+                    i++;
                 }
                 list1.ItemsSource = items;
             }
