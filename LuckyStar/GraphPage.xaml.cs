@@ -39,23 +39,43 @@ namespace LuckyStar
                 visited[i] = false;
             }
 
+            string asdf = "1-2-3-4"; //INI BUAT INPUTNYA
+            string[] color = ColorGraf(asdf);
+
+            MakeGraf(visited, color);
+
+            infoXY.Content = color[0];
+        }
+
+        void MakeGraf(bool[] visited, string[] color)
+        {
             int level = 0;
             arr = new double[1000001];
-            for (int i = 0; i<arr.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = 20;
             }
             y = 20;
-            DrawGraph(1, paths, visited, level,20,20);
-            canvas1.Width = (houses+1) * 100;
-            canvas1.Height = (houses+1) * 100;
+            DrawGraph(1, paths, visited, level, 20, 20, color);
+            canvas1.Width = (houses + 1) * 100;
+            canvas1.Height = (houses + 1) * 100;
             this.Content = mainGrid;
         }
 
-        void DrawGraph(int i, LinkedList<int>[] paths, bool[] visited, int level,double curr_x,double curr_y)
+        string[] ColorGraf(string path)
+        {
+            string[] jalur = path.Split('-');
+            for (int i = 0; i < jalur.Length; i++)
+            {
+                jalur[i] = "c" + jalur[i];
+            }
+            return jalur;
+        }
+
+        void DrawGraph(int i, LinkedList<int>[] paths, bool[] visited, int level,double curr_x,double curr_y,string[] color)
         {
             visited[i] = true;
-            DrawCircle(arr[level], y, canvas1, i);
+            DrawCircle(arr[level], y, canvas1, i, color);
             arr[level] += 100;
             y += 100;
             level++;
@@ -69,7 +89,7 @@ namespace LuckyStar
                     x2 = arr[level] + 25;
                     y2 = y + 25;
                     DrawLine(canvas1);
-                    DrawGraph(p, paths, visited, level,arr[level],y);
+                    DrawGraph(p, paths, visited, level,arr[level],y,color);
                 }
             }
             y -= 100;
@@ -95,16 +115,41 @@ namespace LuckyStar
             g.Children.Add(l1);
         }
 
+        bool IsElemen(string[] arr, string a)
+        {
+            bool found = false;
+            int i = 0;
+            while ((i < arr.Length) && (!found))
+            {
+                if (arr[i] == a)
+                {
+                    found = true;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            return found;
+        }
 
-        private void DrawCircle(double x, double y,Canvas c,int no)
+        private void DrawCircle(double x, double y,Canvas c,int no, string[] color)
         {
             Ellipse circle = new Ellipse();
             circle.StrokeThickness = 3;
             circle.Stroke = System.Windows.Media.Brushes.Black;
-            circle.Fill = System.Windows.Media.Brushes.Black;
             circle.Width = 50;
             circle.Height = 50;
-            circle.Name = "c" + no.ToString();
+            string name = "c" + no.ToString();
+            circle.Name = name;
+            if (IsElemen(color, name))
+            {
+                circle.Fill = System.Windows.Media.Brushes.Red;
+            }
+            else
+            {
+                circle.Fill = System.Windows.Media.Brushes.Black;
+            }
 
             TextBlock txt = new TextBlock();
             txt.Text = no.ToString();
