@@ -34,7 +34,7 @@
         </ScrollViewer>
         <Label x:Name="infoXY" Grid.Column="0" Grid.Row="0"/>
         <ScrollViewer x:Name="scroll2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"  Grid.Row="5" Grid.RowSpan="2">
-            <ListBox x:Name="list1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="5" Grid.RowSpan="2"/>
+            <ListView x:Name="list1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="5" Grid.RowSpan="2"/>
         </ScrollViewer>
     </Grid>
 

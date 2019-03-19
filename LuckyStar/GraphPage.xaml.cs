@@ -42,6 +42,18 @@ namespace LuckyStar
             string asdf = "5-2-3-4"; //INI BUAT INPUTNYA
             string[] color = ColorGraf(asdf);
             MakeGraf(visited, color);
+
+            //TESTING
+            List<string> items = new List<string> { };
+            items.Add("PERTANYAAN :");
+            items.Add("qwer");
+            items.Add("  ");
+            items.Add("JAWABAN :");
+            items.Add("asdf");
+            items.Add("   ");
+            items.Add("ENUMERASI LANGKAH :");
+            items.Add("zxcv");
+            list1.ItemsSource = items;
         }
 
         void MakeGraf(bool[] visited, string[] color)
@@ -93,14 +105,7 @@ namespace LuckyStar
             y -= 100;
             level--;
         }
-
-        private void List1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //INI BUAT NAMPILIN JALUS 
-            //1-2-3-4 
-            //5-6-7-8
-            //DLL
-        }
+        
 
         private void DrawLine(Canvas g) //buat bikin garis
         {
