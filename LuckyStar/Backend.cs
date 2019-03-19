@@ -28,17 +28,23 @@ namespace LuckyStar
             {
                 string[] inputs = txt[i].Split(' ');
                 paths[Int32.Parse(inputs[0])].AddLast(Int32.Parse(inputs[1]));
-                paths[Int32.Parse(inputs[1])].AddLast(Int32.Parse(inputs[0]));
+                paths[Int32.Parse(inputs[1])].AddLast(-Int32.Parse(inputs[0]));
             }
             
+            /* Untuk testing. Melihat isi paths.
+            foreach(LinkedList<int> p2 in paths)
+            {
+                Console.WriteLine(String.Join(" ", p2));
+            } */
+
             return paths; //hasil akhir array of LinkedList<int>
         }
 
-        public static List<string[]> SolveBulk(string path, LinkedList<int>[] paths)
+        public static List<List<string>> SolveBulk(string path, LinkedList<int>[] paths)
         //menjawab pertanyaan beruntun Ferdiant dari membaca berkas eksternal
         {
             int instances = new int();
-            List<string[]> answers = new List<string[]>(); // penampung jawaban
+            List<List<string>> answers = new List<List<string>>(); // penampung jawaban
             string text = File.ReadAllText(@path, Encoding.UTF8);
             string[] txt = text.Split('\n');
             bool first = true;
@@ -64,59 +70,76 @@ namespace LuckyStar
                         {
                             visited[i] = false;
                         }
-                        answers.Add(Solve(Int32.Parse(inputs[0]), Int32.Parse(inputs[1]), Int32.Parse(inputs[2]), paths, "", visited));
+                        List<string> enumeration = new List<string>();
+                        string ans = Solve(Int32.Parse(inputs[0]), Int32.Parse(inputs[1]), Int32.Parse(inputs[2]), paths, "", enumeration) ? "YA" : "TIDAK";
+                        enumeration.Add(ans);
+                        answers.Add(enumeration);
                     }
                 }
             }
             return answers; //List of jawaban dikembalikan
         }
 
-        public static string[] Solve(int a,int b,int c, LinkedList<int>[] paths, string temp, bool[] visited)
+        public static bool ExistsInPath(int p, string temp)
+        {
+            String[] arr = temp.Split('-');
+            bool found = false;
+            foreach(string a in arr)
+            {
+                if(a == p.ToString())
+                {
+                    found = true; break;
+                }
+            }
+            return found;
+
+        }
+
+        public static bool Solve(int a,int b,int c, LinkedList<int>[] paths, string temp,List<string> enumerations)
         //Menjawab pertanyaan dari Ferdiant
         {
             string old_temp = temp; // variasi baru dari path
+            bool found = false; //penampung jawaban
             temp += c + "-";
-            string[] ans = new string[paths.Length];
             if (c == b) // rumah ditemukan
             {
-                ans[0] = "YA";
-                ans[ans.Length] = temp;
+                enumerations.Add(temp);
                 temp = ""; //temp direset
-                return ans;
+                return true;
             }
-            else if (c == 1 || paths[c].Count == 0) //jalan buntu, rumah tidak ditemukan
+            else if (c == 1 && a == 0) //jalan sampai istana, rumah tidak ditemukan
             {
-                ans[0] = "TIDAK";
-                ans[ans.Length] = temp;
+                enumerations.Add(temp);
                 temp = ""; //temp direset
-                return ans;
+                return false;
             }
             else //masih bisa jalan ke rumah berikutnya
             {
-
+                int count = 0;
                 foreach (int p in paths[c]) //semua kemungkinan rumah yang bisa dicapai
                 {
-                    if (!visited[p])
+                    int new_p = p > 0 ? p : -p;
+                    if (!ExistsInPath(new_p, temp))
                     {
-                        visited[p] = true;
-                        if ((a == 0 && p < b) || (a == 1 && p > b)) //validasi rute sesuai syarat mendekati/menjauhi istana
+                        if ((a == 0 && p<0) || (a == 1 && p>0)) //validasi rute sesuai syarat mendekati/menjauhi istana
                         {
-                            string[] ans_temp = Solve(a, b, p, paths, temp, visited);
-                            for (int i = ans.Length; i <= ans_temp.Length; i++)
-                            {
-                                ans[i] = ans_temp[i]; //enumerasi path ditambah.
-                            }
-                        }
-                        if (ans[0] == "YA") // solusi ditemukan
-                        {
-                            break;
+                            found = found || Solve(a, b, new_p, paths, temp, enumerations);
+                            count++;
                         }
                     }
+                    
+                    if (found) { break; } // solusi ditemukan
                 }
-                
+                if (count == 0) //jika jalan buntu, rumah tidak ditemukan
+                {
+                    enumerations.Add(temp);
+                    temp = ""; //temp direset
+                    return false;
+                }
             }
             temp = old_temp; //variasi selesai
-            return ans; //solusi dikembalikan
+            
+            return found; //solusi dikembalikan
         }
     }
 }

@@ -54,6 +54,7 @@ namespace LuckyStar
 
         void DrawGraph(int i, LinkedList<int>[] paths, bool[] visited, int level,double curr_x,double curr_y)
         {
+            i = i > 0 ? i : -i;
             visited[i] = true;
             DrawCircle(arr[level], y, canvas1, i);
             arr[level] += 100;
@@ -63,26 +64,19 @@ namespace LuckyStar
             
             foreach (int p in paths[i])
             {
-                if (!visited[p])
+                int new_p = p > 0 ? p : -p;
+                if (!visited[new_p])
                 {
                     x1 = curr_x + 25; y1 = curr_y + 25;
                     x2 = arr[level] + 25;
                     y2 = y + 25;
                     DrawLine(canvas1);
-                    DrawGraph(p, paths, visited, level,arr[level],y);
+                    DrawGraph(new_p, paths, visited, level,arr[level],y);
                 }
             }
             y -= 100;
             level--;
         }
-
-        private void drawingGrid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            try { canvas1.Height = y + 100; } catch { }
-            try { canvas1.Width = x + 100; } catch { }
-            infoXY.Content = "lalalala";
-        }
-
 
         private void DrawLine(Canvas g) //buat bikin garis
         {
@@ -143,15 +137,18 @@ namespace LuckyStar
                 int a = Int32.Parse(exploded[0]);
                 int b = Int32.Parse(exploded[1]);
                 int c = Int32.Parse(exploded[2]);
-                bool[] visited = new bool[houses];
-                for(int i = 0; i < houses; i++) { visited[i] = false; }
-                string[] answers = Backend.Solve(a, b, c, paths, "", visited);
-                Console.WriteLine("Balance in all things - IMBA Spirit");
-                foreach(string ans in answers)
+                List<string> enumeration = new List<string>();
+                bool answers = Backend.Solve(a, b, c, paths, "", enumeration);
+                Console.WriteLine(answers); //ini answer bools nya
+                foreach(string ans in enumeration)
                 {
-                    Console.WriteLine(ans);
-                }
+                    Console.WriteLine("path : "+ans+", split : ");
+                    foreach(string node in ans.Split('-'))
+                    {
+                        Console.WriteLine(node);
+                    }
 
+                }
             }
         }
     }
